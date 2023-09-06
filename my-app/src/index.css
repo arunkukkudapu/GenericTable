@@ -11,3 +11,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.grid-data-table .ant-table-thead >tr>th{
+  background-color: blue;
+  border: 1px solid #f0f0f0;
+
+}
+
+.grid-data-table .ant-table-tbody >tr >td {
+  border: 1px solid #f0f0f0;
+}
+
+.grid-data-table .ant-table-thead >tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before {
+  width: 0px;
+}
+
+.dropdown-menu-height {
+  max-height: 300px;
+  overflow: scroll;
+}
