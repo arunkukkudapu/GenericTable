@@ -74,7 +74,6 @@ const CustomTable = () => {
         })
       }
     })
-    setFilteredData(filteredData)
     // sorting
     if(sortCol){
       filteredData = filteredData.sort((a, b) =>{
@@ -87,6 +86,7 @@ const CustomTable = () => {
         }
       })
     }
+    setFilteredData(filteredData)
     //paginations
     const startIndex = (currentPage - 1) * itemPerPage;
     const endIndex = startIndex + itemPerPage;

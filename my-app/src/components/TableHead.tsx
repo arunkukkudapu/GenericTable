@@ -7,7 +7,7 @@ const TableHead = ({ perManenentlist, columnFilters, handleColumnFilterChange, g
             <tr style={{ padding: '10px' }}>
                 <th />
                 {columns.map((ite, index) => {
-                    return <th key={index} style={{ padding: '10px' }} onClick={() => handleSort(ite)}>{sortCol.toLowerCase() === ite.toLowerCase() ? ite + sortOrder : ite}
+                    return <th key={index} style={{ padding: '10px' }} onClick={() => handleSort(ite)}>{sortCol.toLowerCase() === ite.toLowerCase() ? ite + ' ' + sortOrder : ite}
                         <div className="btn-group">
                             <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                 filter
