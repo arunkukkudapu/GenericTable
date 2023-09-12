@@ -1,13 +1,13 @@
 import React, { memo } from 'react';
 // import Dropdown from 'react-bootstrap/Dropdown';
 
-const TableHead = ({ perManenentlist, columnFilters, handleColumnFilterChange, getColumnFilterOptions, columns }) => {
+const TableHead = ({ perManenentlist, columnFilters, handleColumnFilterChange, getColumnFilterOptions, columns, sortCol, handleSort, sortOrder }) => {
     return (
         <thead>
             <tr style={{ padding: '10px' }}>
                 <th />
                 {columns.map((ite, index) => {
-                    return <th key={index} style={{ padding: '10px' }}>{ite}
+                    return <th key={index} style={{ padding: '10px' }} onClick={() => handleSort(ite)}>{sortCol.toLowerCase() === ite.toLowerCase() ? ite + sortOrder : ite}
                         <div className="btn-group">
                             <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                 filter

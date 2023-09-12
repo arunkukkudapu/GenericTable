@@ -12,6 +12,8 @@ const CustomTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemPerPage, setItemsPerPage] = useState(5);
   const [filteredData, setFilteredData] = useState([]);
+  const [sortCol, setSortCol] = useState('');
+  const [sortOrder, setSortOrder] = useState('asc');
   useEffect(() => {
     axios.get('https://dummyjson.com/products').then((res) => {
       setList(res.data.products);
@@ -33,7 +35,7 @@ const CustomTable = () => {
 
   useEffect(() => {
     applyFilter();
-  }, [columnFilters, globalFilter, currentPage, itemPerPage])
+  }, [columnFilters, globalFilter, currentPage, itemPerPage, sortCol, sortOrder])
 
   const getColumnFilterOptions = (col) => {
     const options = new Set();
@@ -53,10 +55,10 @@ const CustomTable = () => {
     setCurrentPage(1)
   }
   const applyFilter = () => {
-    debugger;
     let filteredData = [...perManenentlist];
+
+    // global search
     if (globalFilter.length > 3) {
-      debugger;
       filteredData = filteredData.filter((item) => {
         return Object.keys(item).some((key) =>
           item[key].toString().toLowerCase().includes(globalFilter.toLowerCase())
@@ -64,6 +66,7 @@ const CustomTable = () => {
       })
     }
 
+    // column filters
     Object.keys(columnFilters).forEach((col) => {
       if (columnFilters[col].length > 0) {
         filteredData = filteredData.filter((i) => {
@@ -72,7 +75,19 @@ const CustomTable = () => {
       }
     })
     setFilteredData(filteredData)
-    debugger;
+    // sorting
+    if(sortCol){
+      filteredData = filteredData.sort((a, b) =>{
+        const avalue = a[sortCol.toLowerCase()];
+        const bvalue = b[sortCol.toLowerCase()];
+        if(sortOrder === 'asc'){
+          return avalue < bvalue ? -1 : avalue > bvalue ? 1 : 0; 
+        }else {
+          return avalue > bvalue ? -1 : avalue < bvalue ? 1 : 0;
+        }
+      })
+    }
+    //paginations
     const startIndex = (currentPage - 1) * itemPerPage;
     const endIndex = startIndex + itemPerPage;
     const pageData = filteredData.slice(startIndex, endIndex);
@@ -92,13 +107,21 @@ const CustomTable = () => {
     setList(newList);
     setSelectedRows(new Set());
   }
+  const handleSort = (col) => {
+    if(sortCol === col) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')
+    }else{
+      setSortCol(col)
+      setSortOrder('asc')
+    }
+  }
   return (
     <>
       <input type="text" value={globalFilter} onChange={(e) => setGlobalFilter(e.target.value)} />
       <table style={{ padding: '10px' }}>
         {/* <tr style={{ padding: '10px' }}>
           <th /> */}
-          <TableHead perManenentlist={perManenentlist} columnFilters={columnFilters} getColumnFilterOptions={getColumnFilterOptions} handleColumnFilterChange={handleColumnFilterChange} columns={columns} />
+          <TableHead perManenentlist={perManenentlist} columnFilters={columnFilters} getColumnFilterOptions={getColumnFilterOptions} handleColumnFilterChange={handleColumnFilterChange} columns={columns} sortCol={sortCol} sortOrder={sortOrder} handleSort={handleSort}/>
           {/* {columns.map((ite) => {
             return <th style={{ padding: '10px' }}>{ite}
               <Dropdown>
