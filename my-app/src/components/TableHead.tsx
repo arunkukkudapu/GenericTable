@@ -7,10 +7,10 @@ const TableHead = ({ perManenentlist, columnFilters, handleColumnFilterChange, g
             <tr style={{ padding: '10px' }}>
                 <th />
                 {columns.map((ite, index) => {
-                    return <th key={index} style={{ padding: '10px' }} onClick={() => handleSort(ite)}>{sortCol.toLowerCase() === ite.toLowerCase() ? ite + ' ' + sortOrder : ite}
+                    return <th key={index} style={{ padding: '10px' }}><span onClick={() => handleSort(ite)}>{sortCol.toLowerCase() === ite.toLowerCase() ? ite + ' ' + sortOrder : ite}</span>
                         <div className="btn-group">
                             <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                                filter
+                                <span className='text' title={columnFilters?.[ite.toLowerCase()]?.length > 0 ? columnFilters?.[ite.toLowerCase()].toString() : 'Select'}>{columnFilters?.[ite.toLowerCase()]?.length > 0 ? columnFilters?.[ite.toLowerCase()].toString() : 'Select'}</span>
                             </button>
                             <ul className="dropdown-menu dropdown-menu-height">
                                 {perManenentlist.length > 0 && Object.keys(columnFilters).length > 0 && getColumnFilterOptions(ite.toLowerCase()).map((op, index) => (

@@ -119,28 +119,7 @@ const CustomTable = () => {
     <>
       <input type="text" value={globalFilter} onChange={(e) => setGlobalFilter(e.target.value)} />
       <table style={{ padding: '10px' }}>
-        {/* <tr style={{ padding: '10px' }}>
-          <th /> */}
           <TableHead perManenentlist={perManenentlist} columnFilters={columnFilters} getColumnFilterOptions={getColumnFilterOptions} handleColumnFilterChange={handleColumnFilterChange} columns={columns} sortCol={sortCol} sortOrder={sortOrder} handleSort={handleSort}/>
-          {/* {columns.map((ite) => {
-            return <th style={{ padding: '10px' }}>{ite}
-              <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  filter
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {perManenentlist.length > 0 && Object.keys(columnFilters).length > 0 && getColumnFilterOptions(ite.toLowerCase()).map((op) => (
-                    <div>
-                      <input type="checkbox" checked={columnFilters[ite.toLowerCase()].includes(op)} onChange={(e) => handleColumnFilterChange(e, ite.toLowerCase(), op)} />
-                      {op}
-                    </div>
-                    // )
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
-            </th>
-          })}
-        </tr> */}
         <tbody>
           {list.length > 0 && list.map((it) => {
             const row = columns.map((ita, index) => {

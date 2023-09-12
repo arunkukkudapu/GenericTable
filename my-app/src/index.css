@@ -30,3 +30,12 @@ code {
   max-height: 300px;
   overflow: scroll;
 }
+
+.text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 150px;
+  display: inline-block;
+  vertical-align: middle;
+}
